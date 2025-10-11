@@ -43,10 +43,10 @@ layers:
   - ''
   - Ctl+R
   - PSCRN
-  - ''
-  - ''
-  - ''
-  - ''
+  - Gui+1
+  - Gui+2
+  - Gui+3
+  - Gui+4
   - BACKSPACE
   - {t: LCTRL, h: sticky}
   - {t: LALT, h: sticky}
