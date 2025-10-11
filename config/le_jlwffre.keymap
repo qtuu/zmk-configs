@@ -132,8 +132,8 @@
         nav_layer {
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮      ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│          │          │          │          │PRINTSCREEN│     │          │          │          │          │BACKSPACE │
-            &kp ESC      &none  &none       &kp LC(R)   &kp PSCRN         &none       &none      &none    &none     &kp BACKSPACE 
+        //│          │          │          │          │PRINTSCREEN│     │  WS 1    │ WS 2     │  WS 3    │ WS 4     │BACKSPACE │
+            &kp ESC      &none  &none       &kp LC(R)   &kp PSCRN        &kp LG(N1) &kp LG(N2) &kp LG(N3) &kp LG(N4) &kp BACKSPACE 
         //├──────────┼──────────┼──────────┼──────────┼──────────┤      ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  LCTRL    │  LALT    │ LGUI    │          │          │      │  LEFT    │  DOWN    │  UP      │  RIGHT   │  DEL     │
             &sk LCTRL   &sk LALT   &sk LGUI  &kp LC(F)   &kp TAB           &kp LEFT    &kp DOWN   &kp UP  &kp RIGHT  &kp DEL
