@@ -14,8 +14,8 @@ jobs:
     permissions:
       contents: write  # allow workflow to commit to the repo
     with:
-      keymap_patterns: "config/le_jlwffre.keymap"        # path to the keymaps to parse
+      keymap_patterns: "config/le_jlwffre.keymap config/elchibre.keymap"  # path to the keymaps to parse
       config_path: "keymap-drawer/config.yaml"  # config file, ignored if not exists
       output_folder: "keymap-drawer"            # path to save produced SVG and keymap YAML files
-      draw_args: "le_jlwffre:'-d keymap-drawer/le_jlwffre-layouts.dtsi'"
+      draw_args: "le_jlwffre:'-d keymap-drawer/le_jlwffre-layouts.dtsi' elchibre:'-d keymap-drawer/elchibre-layouts.dtsi'"
       fail_on_error: true
