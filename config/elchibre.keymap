@@ -41,14 +41,9 @@
 
         combos {
             compatible = "zmk,combos";
-            combo_esc {
-                timeout-ms = <50>;
-                key-positions = <0 1>;
-                bindings = <&kp ESC>;
-            };
             combo_enter {
                 timeout-ms = <50>;
-                key-positions = <17 18>;
+                key-positions = <18 19>;
                 bindings = <&kp ENTER>;
             };
             combo_reset {
@@ -112,7 +107,7 @@
         //│  Z       │  X       │  C       │  V       │  B       │                      │  N       │  M       │ , <      │ . >      │ / ?      │
             &kp Z      &kp X      &kp C      &kp V      &kp B                             &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────╯                      ╰──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &mo NAV    &kp LSHIFT                        &lt FUN SPACE  &mo SYM
+                                            &mo NAV    &kp ESC    &kp LSHIFT                &lt FUN SPACE  &mo FUN    &mo SYM
         //                                 ╰──────────┴──────────╯                      ╰──────────┴──────────╯
             >;
         };
@@ -128,7 +123,7 @@
         //│  ^       │ #        │  *       │  +       │ [        │      │  ]       │   -      │ %        │          │ \        │
             &kp CARET &kp HASH  &kp STAR   &kp PLUS   &kp LEFT_BRACKET  &kp RIGHT_BRACKET &kp MINUS &kp PERCENT &none &kp BACKSLASH
         //╰──────────┴──────────┴──────────┼──────────┼──────────╯      ╰──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &trans     &trans            &trans     &trans
+                                            &trans     &trans     &trans  &trans     &trans     &trans
         //                                 ╰──────────┴──────────╯      ╰──────────┴──────────╯
             >;
         };
@@ -144,7 +139,7 @@
         //│ CTRL+Z   │ CTRL+X   │ CTRL+C   │ CTRL+V   │  HOME    │      │  END     │          │          │          │  RGUI    │
             &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &kp HOME         &kp END    &none      &none      &none      &kp RGUI
         //╰──────────┴──────────┴──────────┼──────────┼──────────╯      ╰──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &trans     &trans            &trans     &trans
+                                            &trans     &trans     &trans  &trans     &trans     &trans
         //                                 ╰──────────┴──────────╯      ╰──────────┴──────────╯
             >;
         };
@@ -160,7 +155,7 @@
         //│          │          │   *      │   +      │          │      │          │   -      │ ,        │ .        │ /        │
             &none      &none      &kp STAR   &kp PLUS   &none             &none      &kp MINUS  &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────╯      ╰──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &trans     &trans            &trans     &trans
+                                            &trans     &trans     &trans  &trans     &trans     &trans
         //                                 ╰──────────┴──────────╯      ╰──────────┴──────────╯
             >;
         };
@@ -176,7 +171,7 @@
         //│          │          │          │  VOL UP  │          │      │          │  VOL DN  │          │          │          │
             &none      &none      &none      &kp C_VOL_UP &none           &none      &kp C_VOL_DN &none    &none      &none
         //╰──────────┴──────────┴──────────┼──────────┼──────────╯      ╰──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &trans     &trans            &trans     &trans
+                                            &trans     &trans     &trans  &trans     &trans     &trans
         //                                 ╰──────────┴──────────╯      ╰──────────┴──────────╯
             >;
         };
