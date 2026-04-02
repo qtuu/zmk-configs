@@ -1,42 +1,6 @@
 layout: {zmk_keyboard: elchibre}
 layers:
-  default:
-  - Q
-  - W
-  - E
-  - R
-  - T
-  - Y
-  - U
-  - I
-  - O
-  - P
-  - A
-  - S
-  - D
-  - F
-  - G
-  - H
-  - J
-  - K
-  - L
-  - ;
-  - Z
-  - X
-  - C
-  - V
-  - B
-  - N
-  - M
-  - ','
-  - .
-  - /
-  - nav
-  - ESC
-  - LSHIFT
-  - {t: SPACE, h: fn}
-  - fn
-  - sym
+  default: [Q, W, E, R, T, Y, U, I, O, P, A, S, D, F, G, H, J, K, L, ;, Z, X, C, V, B, N, M, ',', ., /, nav, ESC, LSHIFT, SPACE, fn, sym]
   sym:
   - '`'
   - Sft+`
@@ -182,8 +146,8 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {type: held}
   - {t: ▽, type: trans}
+  - {type: held}
   - {t: ▽, type: trans}
 combos:
 - p: [18, 19]
