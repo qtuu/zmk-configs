@@ -107,7 +107,7 @@
         //│  Z       │  X       │  C       │  V       │  B       │                      │  N       │  M       │ , <      │ . >      │ / ?      │
             &kp Z      &kp X      &kp C      &kp V      &kp B                             &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────╯                      ╰──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &mo NAV    &kp ESC    &kp LSHIFT                &lt FUN SPACE  &mo FUN    &mo SYM
+                                            &mo NAV    &kp ESC    &kp LSHIFT                &kp SPACE  &mo FUN    &mo SYM
         //                                 ╰──────────┴──────────╯                      ╰──────────┴──────────╯
             >;
         };
