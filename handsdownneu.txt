@@ -1,0 +1,14 @@
+Alphas
+w  f  m  p  v   /  .  q  z  j
+
+r  s  n  t  b   ,  a  e  i  h
+
+x  c  l  d  g   -  u  o  y  k
+
+
+Symbols
+`  ~  "  |  &   \  _  !  %  F12
+
+ß  $  '  =  (   )  ä  @  {  }
+
+^  #  *  +  [   ]  ü  ö

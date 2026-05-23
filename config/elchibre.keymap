@@ -8,10 +8,12 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #define DEFAULT 0
-#define SYM 1
-#define NAV 2
-#define NUM 3
-#define FUN 4
+#define HDN     1
+#define SYM     2
+#define HDN_SYM 3
+#define NAV     4
+#define NUM     5
+#define FUN     6
 
 / {
     behaviors {
@@ -38,6 +40,22 @@
             bindings = <&shifted>, <&kp>;
             flavor = "tap-preferred";
         };
+        qu_morph: qu_morph {
+            // GUI/Ctrl/Alt + Q -> plain Q (keep WM/app shortcuts), else -> qu macro
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&qu_macro>, <&kp Q>;
+            mods = <(MOD_LGUI|MOD_RGUI|MOD_LCTL|MOD_RCTL|MOD_LALT|MOD_RALT)>;
+        };
+        qu: qu {
+            // tap -> qu_morph (qu/Qu), hold -> q
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <220>;
+            bindings = <&kp>, <&qu_tap>;
+        };
 
         combos {
             compatible = "zmk,combos";
@@ -49,13 +67,13 @@
             combo_reset {
                 timeout-ms = <50>;
                 key-positions = <0 9>;
-                layers = <SYM>;
+                layers = <SYM HDN_SYM>;
                 bindings = <&sys_reset>;
             };
             combo_boot {
                 timeout-ms = <50>;
                 key-positions = <5 20>;
-                layers = <SYM>;
+                layers = <SYM HDN_SYM>;
                 bindings = <&bootloader>;
             };
         };
@@ -65,10 +83,30 @@
                 if-layers = <SYM NAV>;
                 then-layer = <NUM>;
             };
+            tri_layer_hdn {
+                if-layers = <HDN_SYM NAV>;
+                then-layer = <NUM>;
+            };
         };
     };
 
     macros {
+        qu_macro: qu_macro {
+            // types "qu"; with Shift held types "Qu" (Shift dropped after the Q)
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+              = <&macro_tap &kp Q>
+              , <&macro_release &kp LSHFT>
+              , <&macro_release &kp RSHFT>
+              , <&macro_tap &kp U>;
+        };
+        qu_tap: qu_tap {
+            // 1-param wrapper so the qu hold-tap can call qu_morph (param ignored)
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&qu_morph>;
+        };
         shifted: macro_shifted_kp {
             #binding-cells = <1>;
             compatible = "zmk,behavior-macro-one-param";
@@ -98,8 +136,8 @@
         default_layer {
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮                      ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│  Q       │  W       │  E       │  R       │  T       │                      │  Y       │  U       │  I       │  O       │   P      │
-            &kp Q      &kp W      &kp E      &kp R      &kp T                             &kp Y      &kp U      &kp I      &kp O      &kp P
+        //│  Qu      │  W       │  E       │  R       │  T       │                      │  Y       │  U       │  I       │  O       │   P      │
+            &qu Q 0    &kp W      &kp E      &kp R      &kp T                             &kp Y      &kp U      &kp I      &kp O      &kp P
         //├──────────┼──────────┼──────────┼──────────┼──────────┤                      ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  A       │  S       │  D       │  F       │  G       │                      │  H       │  J       │  K       │  L       │ ; :      │
             &kp A      &kp S      &kp D      &kp F      &kp G                             &kp H      &kp J      &kp K      &kp L      &kp SEMI
@@ -107,7 +145,23 @@
         //│  Z       │  X       │  C       │  V       │  B       │                      │  N       │  M       │ , <      │ . >      │ / ?      │
             &kp Z      &kp X      &kp C      &kp V      &kp B                             &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────╯                      ╰──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &kp ESC  &mo NAV  &kp LSHIFT                &kp SPACE  &mo SYM &mo FUN    
+                                            &kp ESC  &mo NAV  &kp LSHIFT                &kp SPACE  &mo SYM &mo FUN
+        //                                 ╰──────────┴──────────╯                      ╰──────────┴──────────╯
+            >;
+        };
+        hdn_layer {
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮                      ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│  W       │  F       │  M       │  P       │  V       │                      │  /       │  .       │  Qu      │  Z       │   J      │
+            &kp W      &kp F      &kp M      &kp P      &kp V                             &kp FSLH   &kp DOT    &qu Q 0    &kp Z      &kp J
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤                      ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│  R       │  S       │  N       │  T       │  B       │                      │  ,       │  A       │  E       │  I       │  H       │
+            &kp R      &kp S      &kp N      &kp T      &kp B                             &kp COMMA  &kp A      &kp E      &kp I      &kp H
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤                      ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│  X       │  C       │  L       │  D       │  G       │                      │  -       │  U       │  O       │  Y       │  K       │
+            &kp X      &kp C      &kp L      &kp D      &kp G                             &kp MINUS  &kp U      &kp O      &kp Y      &kp K
+        //╰──────────┴──────────┴──────────┼──────────┼──────────╯                      ╰──────────┼──────────┼──────────┴──────────┴──────────╯
+                                            &kp ESC  &mo NAV  &kp LSHIFT                &kp SPACE  &mo HDN_SYM &mo FUN
         //                                 ╰──────────┴──────────╯                      ╰──────────┴──────────╯
             >;
         };
@@ -122,6 +176,22 @@
         //├──────────┼──────────┼──────────┼──────────┼──────────┤      ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  ^       │ #        │  *       │  +       │ [        │      │  ]       │   -      │ %        │          │ \        │
             &kp CARET &kp HASH  &kp STAR   &kp PLUS   &kp LEFT_BRACKET  &kp RIGHT_BRACKET &kp MINUS &kp PERCENT &none &kp BACKSLASH
+        //╰──────────┴──────────┴──────────┼──────────┼──────────╯      ╰──────────┼──────────┼──────────┴──────────┴──────────╯
+                                            &trans     &trans     &trans  &trans     &trans     &trans
+        //                                 ╰──────────┴──────────╯      ╰──────────┴──────────╯
+            >;
+        };
+        hdn_sym_layer {
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮      ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│  `       │  ~       │  "       │    |     │    &     │      │  \       │ _        │ !        │  %       │  F12     │
+            &kp GRAVE &kp LS(GRAVE) &kp DQT &kp PIPE  &kp AMPS          &kp BACKSLASH &kp UNDER &kp EXCLAMATION &kp PERCENT &kp F12
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤      ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│  ß       │  $       │ '        │  =       │  (       │      │  )       │  ä       │  @       │  {       │  }       │
+            &kp RA(S) &kp DOLLAR &kp APOS  &kp EQUAL  &kp LPAR          &kp RPAR   &kp RA(A)  &kp AT     &kp LS(LEFT_BRACKET) &kp LS(RIGHT_BRACKET)
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤      ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│  ^       │ #        │  *       │  +       │ [        │      │  ]       │  ü       │ ö        │          │          │
+            &kp CARET &kp HASH  &kp STAR   &kp PLUS   &kp LEFT_BRACKET  &kp RIGHT_BRACKET &kp RA(U) &kp RA(O) &none &none
         //╰──────────┴──────────┴──────────┼──────────┼──────────╯      ╰──────────┼──────────┼──────────┴──────────┴──────────╯
                                             &trans     &trans     &trans  &trans     &trans     &trans
         //                                 ╰──────────┴──────────╯      ╰──────────┴──────────╯
@@ -162,8 +232,8 @@
         fn_layer {
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮      ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│ BT CLEAR │ BT SEL 0 │ BT SEL 1 │ BT SEL 2 │          │      │  MUTE    │          │          │  F11     │  F12     │
-            &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &none    &kp C_MUTE &none      &none      &kp F11    &kp F12
+        //│ BT CLEAR │ BT SEL 0 │ BT SEL 1 │ BT SEL 2 │ HDN TOGGLE      │  MUTE    │          │          │  F11     │  F12     │
+            &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &tog HDN  &kp C_MUTE &none      &none      &kp F11    &kp F12
         //├──────────┼──────────┼──────────┼──────────┼──────────┤      ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  F1      │  F2      │  F3      │  F4      │  F5      │      │  F6      │  F7      │  F8      │  F9      │  F10     │
             &kp F1     &kp F2     &kp F3     &kp F4     &kp F5            &kp F6     &kp F7     &kp F8     &kp F9     &kp F10
