@@ -1,6 +1,79 @@
 layout: {zmk_keyboard: elchibre}
 layers:
-  default: [Q, W, E, R, T, Y, U, I, O, P, A, S, D, F, G, H, J, K, L, ;, Z, X, C, V, B, N, M, ',', ., /, ESC, nav, LSHIFT, SPACE, sym, fn]
+  default:
+  - {t: '&qu_tap', h: Q}
+  - W
+  - E
+  - R
+  - T
+  - Y
+  - U
+  - I
+  - O
+  - P
+  - A
+  - S
+  - D
+  - F
+  - G
+  - H
+  - J
+  - K
+  - L
+  - ;
+  - Z
+  - X
+  - C
+  - V
+  - B
+  - N
+  - M
+  - ','
+  - .
+  - /
+  - ESC
+  - nav
+  - LSHIFT
+  - SPACE
+  - sym
+  - fn
+  hdn:
+  - W
+  - F
+  - M
+  - P
+  - V
+  - /
+  - .
+  - {t: '&qu_tap', h: Q}
+  - Z
+  - J
+  - R
+  - S
+  - N
+  - T
+  - B
+  - ','
+  - A
+  - E
+  - I
+  - H
+  - X
+  - C
+  - L
+  - D
+  - G
+  - '-'
+  - U
+  - O
+  - Y
+  - K
+  - ESC
+  - nav
+  - LSHIFT
+  - SPACE
+  - hdn_sym
+  - fn
   sym:
   - '`'
   - Sft+`
@@ -32,6 +105,43 @@ layers:
   - '%'
   - ''
   - \
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {type: held}
+  - {t: ▽, type: trans}
+  hdn_sym:
+  - '`'
+  - Sft+`
+  - '"'
+  - '|'
+  - '&'
+  - \
+  - _
+  - '!'
+  - '%'
+  - F12
+  - AltGr+S
+  - $
+  - ''''
+  - '='
+  - (
+  - )
+  - AltGr+A
+  - '@'
+  - Sft+[
+  - Sft+]
+  - ^
+  - '#'
+  - '*'
+  - +
+  - '['
+  - ']'
+  - AltGr+U
+  - AltGr+O
+  - ''
+  - ''
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -117,7 +227,7 @@ layers:
   - {t: BT, h: '0'}
   - {t: BT, h: '1'}
   - {t: BT, h: '2'}
-  - ''
+  - {t: hdn, h: toggle}
   - MUTE
   - ''
   - ''
@@ -154,7 +264,7 @@ combos:
   k: ENTER
 - p: [0, 9]
   k: '&sys_reset'
-  l: [sym]
+  l: [sym, hdn_sym]
 - p: [5, 20]
   k: '&bootloader'
-  l: [sym]
+  l: [sym, hdn_sym]
